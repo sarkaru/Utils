@@ -1,0 +1,8 @@
+This basic program i created to block certain sites in the Macbook laptop based on need for my kids 
+to have parental control on spesefic sites.
+
+Need more refactoring.
+
+
+It takes password , which has a logic. May be, if you are using this decode the password very simple logic.
+But i dont wnat to disclose this here, my smarty will read this and fuigure it out. 
