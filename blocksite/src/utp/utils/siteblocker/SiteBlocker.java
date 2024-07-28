@@ -6,47 +6,6 @@ import java.util.List;
 
 public class SiteBlocker {
 
-    public static void modifyHostsFile1(String siteName, int blockFlag, String sudoPassword) throws IOException, InterruptedException {
-        String hostsFilePath = "/etc/hosts";
-        List<String> lines = Files.readAllLines(Paths.get(hostsFilePath));
-
-        String siteEntry = "127.0.0.1 " + siteName;
-        String siteEntryWWW = "127.0.0.1 www." + siteName;
-        String commentedSiteEntry = "#" + siteEntry;
-        String commentedSiteEntryWWW = "#" + siteEntryWWW;
-
-        boolean changesMade = false;
-
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
-            if (blockFlag == 1) {
-                // Block the site
-                if (line.equals(commentedSiteEntry)) {
-                    lines.set(i, siteEntry);
-                    changesMade = true;
-                } else if (line.equals(commentedSiteEntryWWW)) {
-                    lines.set(i, siteEntryWWW);
-                    changesMade = true;
-                }
-            } else if (blockFlag == 0) {
-                // Unblock the site
-                if (line.equals(siteEntry)) {
-                    lines.set(i, commentedSiteEntry);
-                    changesMade = true;
-                } else if (line.equals(siteEntryWWW)) {
-                    lines.set(i, commentedSiteEntryWWW);
-                    changesMade = true;
-                }
-            }
-        }
-
-        if (changesMade) {
-            writeToHostsFile(lines, sudoPassword);
-        } else {
-            System.out.println("No changes were made.");
-        }
-    }
-
    public  static void modifyHostsFile(String siteName, int blockFlag, String sudoPassword) throws IOException, InterruptedException {
         String hostsFilePath = "/etc/hosts";
         List<String> lines = Files.readAllLines(Paths.get(hostsFilePath));
